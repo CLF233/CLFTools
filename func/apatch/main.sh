@@ -35,7 +35,7 @@ patch() {
 	get_input "Input boot image path: " BOOTPATH
 	get_input "Input SuperKey: " SKEY
 	get_tools
-  cp "$BOOTPATH" ${TEMP}/ap/boot.img
+  cp $(realpath $BOOTPATH) ${TEMP}/ap/boot.img
   cd ${TEMP}/ap || exit 1
 	./magiskboot unpack boot.img
 	./kptools-$OS --patch --skey ${SKEY} --kpimg kpimg-android -i kernel -o kernel
