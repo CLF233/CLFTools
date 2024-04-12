@@ -7,7 +7,7 @@ container_menu() {
 	PROMPT+="1. Download rootfs\n"
 	PROMPT+="0. Go to last page\n"
 	echo -e "${PROMPT}"
-	get_input "Input Your choice: " "Input"
+	get_input "Input Your choice: " Input
 	case $Input in
 	1)
 		distro_download
@@ -39,4 +39,3 @@ distro_download() {
 	rm -f rootfs.tar.xz
 	wget "${LXC_MIRROR}${DISTROPATH}rootfs.tar.xz"
 }
-

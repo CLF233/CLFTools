@@ -6,6 +6,7 @@ termux_feat() {
 	echo_blue "Developing...\n"
   PROMPT="CLFTools - termux_feat\n"
 	PROMPT+="1. Container feats\n"
+  PROMPT+="2. Get some infomations of current OS\n"
 	PROMPT+="0. Go to last page\n"
 	echo -e $PROMPT
 	get_input "Input Your choice: " Input
@@ -14,6 +15,10 @@ termux_feat() {
     source ${TEMP}/func/termux/container.sh
 		container_menu
 		;;
+  2)
+    source ${TEMP}/func/termux/getinfo.sh
+    get_info
+    ;;
 	0)
 		main
 		;;
