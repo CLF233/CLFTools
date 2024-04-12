@@ -25,9 +25,9 @@ get_tools() {
   curl_with_progressbar(){
     curl -L --progress-bar "$@"
   }
-	curl_with_progressbar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -O ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
-	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -O ${TEMP}/ap/kpimg-android
-	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -O ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-$OS
+	curl_with_progressbar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -o ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
+	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -o ${TEMP}/ap/kpimg-android
+	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -o ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-$OS
 }
 patch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
