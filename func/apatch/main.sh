@@ -32,7 +32,7 @@ get_tools() {
 patch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
 	get_input "Input KP version: " KPVER
-	get_input -r "Input boot image path: " BOOTPATH
+	get_input "Input boot image path: " BOOTPATH
 	get_input "Input SuperKey: " SKEY
 	get_tools
   cp "$BOOTPATH" ${TEMP}/ap/boot.img
