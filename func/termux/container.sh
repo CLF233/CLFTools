@@ -5,7 +5,7 @@
 container_menu() {
 	PROMPT="CLFTools container_menu\n"
 	PROMPT+="1. Download rootfs\n"
-	PROMPT+="0. Go to last page\n"
+	PROMPT+="0. Go back to the last page\n"
 	echo -e "${PROMPT}"
 	get_input "Input Your choice: " Input
 	case $Input in

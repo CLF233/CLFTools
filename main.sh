@@ -9,21 +9,31 @@ echo_yellow() {
 echo_blue() {
 	echo -e "\033[34m${1}\033[0m"
 }
+echo_green() {
+	echo -e "\033[32m${1}\033[0m"
+}
 echo_red() {
 	echo -e "\033[31m${1}\033[0m"
 }
 
 # input func
 Input=""
-get_input(){
-  read -p "$1" $2
+get_input() {
+	read -p "$1" $2
 }
+
+# OS
+if (command -v getprop >/dev/nul 2>&1); then
+	OS=android
+else
+	OS=linux
+fi
 
 # TEMP folder
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 rm -rf $PREFIX/tmp/CLF*
 mkdir -p ${TEMP}
-cp -rf $(realpath $0|sed 's/\/main.sh//g')/* ${TEMP}
+cp -rf $(realpath $0 | sed 's/\/main.sh//g')/* ${TEMP}
 
 # Arch getter
 # It will create a global variable CPU_ARCH
@@ -63,17 +73,22 @@ main() {
 	PROMPT+="By CLF\n"
 	PROMPT+="1. Termux features\n"
 	PROMPT+="2. Linux fetures\n"
+	PROMPT+="3. APatch patch\n"
 	PROMPT+="0. Exit\n"
 	echo -e "${PROMPT}"
-  get_input "Input Your choice: " Input
+	get_input "Input Your choice: " Input
 	case $Input in
 	1)
 		source ${TEMP}/func/termux/main.sh
 		termux_feat
 		;;
 	2)
-		source func/linux/main.sh
+		source ${TEMP}/func/linux/main.sh
 		linux_feat
+		;;
+	3)
+		source ${TEMP}/func/apatch/main.sh
+		apatch_feat
 		;;
 	0)
 		exit 0

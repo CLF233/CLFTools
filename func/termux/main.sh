@@ -7,7 +7,7 @@ termux_feat() {
   PROMPT="CLFTools - termux_feat\n"
 	PROMPT+="1. Container feats\n"
   PROMPT+="2. Get some infomations of current OS\n"
-	PROMPT+="0. Go to last page\n"
+	PROMPT+="0. Go back to the last page\n"
 	echo -e $PROMPT
 	get_input "Input Your choice: " Input
 	case $Input in
