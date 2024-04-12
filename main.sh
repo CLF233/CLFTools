@@ -20,7 +20,7 @@ get_input(){
 }
 
 # TEMP folder
-TEMP="/tmp/CLF${RANDOM}"
+TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 mkdir -p ${TEMP}
 cp -rf $(realpath main.sh|sed 's/\/main.sh//g')/* ${TEMP}
 
