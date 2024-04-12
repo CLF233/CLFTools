@@ -23,7 +23,7 @@ apatch_feat() {
 }
 get_tools() {
   curl_with_progressbar(){
-    curl --progress-bar -L "$1" "$2"
+    curl --progress-bar -L "$1" "$@"
   }
 	curl_with_progressbar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -O ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
 	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -O ${TEMP}/ap/kpimg-android
