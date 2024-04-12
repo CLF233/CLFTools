@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 #By CLF
 #The Shawshank Redemption
 
