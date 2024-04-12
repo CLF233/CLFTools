@@ -20,8 +20,9 @@ get_input(){
 }
 
 # TEMP folder
-TMP="/tmp/CLF${RAMDOM}"
-mkdir -p ${TMP}
+TEMP="/tmp/CLF${RANDOM}"
+mkdir -p ${TEMP}
+cp -rf $(realpath main.sh|sed 's/\/main.sh//g')/* ${TEMP}
 
 # Arch getter
 # It will create a global variable CPU_ARCH
@@ -63,14 +64,14 @@ main() {
 	PROMPT+="2. Linux fetures\n"
 	PROMPT+="0. Exit\n"
 	echo -e "${PROMPT}"
-  get_input "Input Your choice: " "Input"
+  get_input "Input Your choice: " Input
 	case $Input in
 	1)
-		source ${TEMP}/func/termux.sh
+		source ${TEMP}/func/termux/main.sh
 		termux_feat
 		;;
 	2)
-		source func/linux.sh
+		source func/linux/main.sh
 		linux_feat
 		;;
 	0)

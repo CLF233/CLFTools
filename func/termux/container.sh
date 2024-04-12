@@ -1,26 +1,6 @@
 #!/usr/bin/env bash
 #By CLF
-#The Shawshank Redemption
-
-termux_feat() {
-	echo_blue "Developing...\n"
-	PROMPT="1. Container feats\n"
-	PROMPT+="0. Go to last page\n"
-	echo -e $PROMPT
-	get_input "Input Your choice: " "Input"
-	case $Input in
-	1)
-		container_menu
-		;;
-	0)
-		main
-		;;
-	*)
-		echo_red "E: Bad input: $Input"
-		termux_feat
-		;;
-	esac
-}
+#Three body
 
 container_menu() {
 	PROMPT="CLFTools container_menu\n"
@@ -59,4 +39,4 @@ distro_download() {
 	rm -f rootfs.tar.xz
 	wget "${LXC_MIRROR}${DISTROPATH}rootfs.tar.xz"
 }
-# Eh, I have to say that this is a script with full of shit ;(
+
