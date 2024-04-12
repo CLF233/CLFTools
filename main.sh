@@ -22,7 +22,7 @@ get_input(){
 # TEMP folder
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 mkdir -p ${TEMP}
-cp -rf $(realpath main.sh|sed 's/\/main.sh//g')/* ${TEMP}
+cp -rf $(realpath $0|sed 's/\/main.sh//g')/* ${TEMP}
 
 # Arch getter
 # It will create a global variable CPU_ARCH
