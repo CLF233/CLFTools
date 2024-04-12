@@ -18,6 +18,7 @@ termux_feat() {
   2)
     source ${TEMP}/func/termux/getinfo.sh
     get_info
+    termux_feat
     ;;
 	0)
 		main
