@@ -32,15 +32,16 @@ get_tools() {
 patch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
 	get_input "Input KP version: " KPVER
-	get_input "Input boot image path: " BOOTPATH
+	get_input "Input boot image FULL path: " BOOTPATH
+  BOOTPATH=$(echo $BOOTPATH)
 	get_input "Input SuperKey: " SKEY
-	get_tools
-  cp $(echo $BOOTPATH) ${TEMP}/ap/boot.img
+	get_tools 
+  cp "$BOOTPATH" ${TEMP}/ap/boot.img
   cd ${TEMP}/ap || exit 1
 	./magiskboot unpack boot.img
 	./kptools-$OS --patch --skey ${SKEY} --kpimg kpimg-android -i kernel -o kernel
 	./magiskboot repack boot.img new.img
-	echo_green "I: Success. Output: new.img"
+	echo_green "I: Success. Output: ${TEMP}/ap/new.img"
 }
 unpatch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap

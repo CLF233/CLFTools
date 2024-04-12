@@ -23,7 +23,7 @@ echo_red() {
 # input func
 Input=""
 get_input() {
-	read -r -p "$1" $2
+	read -r -p "$1" "$2"
 }
 
 # OS
