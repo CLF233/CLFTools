@@ -3,6 +3,7 @@
 #The Avengers
 
 apatch_feat() {
+  alias curl_with_progressbar="curl --progress-bar -L"
 	PROMPT="CLFTools - apatch_feat\n"
 	PROMPT+="1. Patch a boot image\n"
 	PROMPT+="2. Unpatch a boot image\n"
@@ -22,8 +23,7 @@ apatch_feat() {
 	esac
 }
 get_tools() {
-  alias curl_with_progressbar="curl --progress-bar -L"
-	curl_with_progressbar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -O ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
+  	curl_with_progressbar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -O ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
 	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -O ${TEMP}/ap/kpimg-android
 	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -O ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-$OS
 }
