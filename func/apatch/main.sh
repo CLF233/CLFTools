@@ -22,20 +22,21 @@ apatch_feat() {
 	esac
 }
 get_tools() {
-	alias curl="curl --progress-bar -L"
-	curl "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -O ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
-	curl "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -O ${TEMP}/ap/kpimg-android
-	curl "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -O ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-android
-	unalias curl
+  curl_with_progressbar(){
+    curl --progress-bar -L "$1" "$2"
+  }
+	curl_with_progressbar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -O ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
+	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -O ${TEMP}/ap/kpimg-android
+	curl_with_progressbar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -O ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-$OS
 }
 patch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
-	cd ${TEMP}/ap || exit 1
 	get_input "Input KP version: " KPVER
 	get_input "Input boot image path: " BOOTPATH
 	get_input "Input SuperKey: " SKEY
 	get_tools
-	cp $(realpath ${BOOTPATH}) ${TEMP}/ap/boot.img
+  cp "$BOOTPATH" ${TEMP}/ap/boot.img
+  cd ${TEMP}/ap || exit 1
 	./magiskboot unpack boot.img
 	./kptools-$OS --patch --skey ${SKEY} --kpimg kpimg-android -i kernel -o kernel
 	./magiskboot repack boot.img new.img
@@ -43,6 +44,6 @@ patch() {
 }
 unpatch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
-	cd ${TEMP}/ap || exit 1
 	get_tools
+  cd ${TEMP}/ap || exit 1
 }

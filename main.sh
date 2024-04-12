@@ -2,6 +2,10 @@
 #By CLF
 #Love and Peace
 
+if [[ "$CLFDEBUG" == "true" ]];then
+  set -x
+fi
+
 #Colorful echo funcs
 echo_yellow() {
 	echo -e "\033[33m${1}\033[0m"
@@ -23,7 +27,7 @@ get_input() {
 }
 
 # OS
-if (command -v getprop >/dev/nul 2>&1); then
+if (command -v getprop >/dev/null 2>&1); then
 	OS=android
 else
 	OS=linux
