@@ -8,7 +8,7 @@ termux_feat() {
 	PROMPT+="1. Container feats\n"
   PROMPT+="2. Get some infomations of current OS\n"
 	PROMPT+="0. Go back to the last page\n"
-	echo -e $PROMPT
+	echo_blue "$PROMPT"
 	get_input "Input Your choice: " Input
 	case $Input in
 	1)

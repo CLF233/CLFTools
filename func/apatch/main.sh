@@ -7,7 +7,7 @@ apatch_feat() {
 	PROMPT+="1. Patch a boot image\n"
 	PROMPT+="2. Unpatch a boot image\n"
 	PROMPT+="0. Go back to the last page\n"
-	echo -e "$PROMPT"
+	echo_blue "$PROMPT"
 	get_input "Input your choice: " input
 	case $input in
 	1)

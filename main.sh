@@ -79,7 +79,7 @@ main() {
 	PROMPT+="2. Linux fetures\n"
 	PROMPT+="3. APatch patch\n"
 	PROMPT+="0. Exit\n"
-	echo -e "${PROMPT}"
+	echo_blue "${PROMPT}"
 	get_input "Input Your choice: " Input
 	case $Input in
 	1)
