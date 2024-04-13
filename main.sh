@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 #By CLF
 #Love and Peace
+#shellcheck disable=SC2086
 
 if [[ "$CLFDEBUG" == "true" ]];then
   set -x
