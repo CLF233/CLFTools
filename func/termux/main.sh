@@ -2,7 +2,13 @@
 #By CLF
 #The Shawshank Redemption
 
+if [[ -z $TERMUX_VERSION ]];then
+  echo_red "E: Use these feats in Termux!"
+  sleep 3
+  main
+fi
 termux_feat() {
+  clear
 	echo_blue "Developing...\n"
   PROMPT="CLFTools - termux_feat\n"
 	PROMPT+="1. Container feats\n"
@@ -25,6 +31,7 @@ termux_feat() {
 		;;
 	*)
 		echo_red "E: Bad input: $Input"
+    sleep 3
 		termux_feat
 		;;
 	esac

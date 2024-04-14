@@ -74,10 +74,11 @@ export CPU_ARCH=${ARCH_TYPE}
 # Arg solver #TODO
 
 main() {
+  clear
 	PROMPT="CLFTools - Ver 0.0.1\n"
 	PROMPT+="By CLF\n"
 	PROMPT+="1. Termux features\n"
-	PROMPT+="2. Linux fetures\n"
+	PROMPT+="2. Linux features\n"
 	PROMPT+="3. APatch patch\n"
 	PROMPT+="0. Exit\n"
 	echo_blue "${PROMPT}"
@@ -100,6 +101,7 @@ main() {
 		;;
 	*)
 		echo_red "E: Bad input: $Input\n"
+    sleep 3
 		main
 		;;
 	esac

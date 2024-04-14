@@ -3,6 +3,7 @@
 #The Avengers
 
 apatch_feat() {
+	clear
 	PROMPT="CLFTools - apatch_feat\n"
 	PROMPT+="1. Patch a boot image\n"
 	PROMPT+="2. Unpatch a boot image\n"
@@ -18,6 +19,11 @@ apatch_feat() {
 		;;
 	0)
 		main
+		;;
+	*)
+		echo_red "E: Bad input: ${input}"
+		sleep 3
+		apatch_feat
 		;;
 	esac
 }
