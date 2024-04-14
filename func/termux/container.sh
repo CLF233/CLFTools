@@ -37,5 +37,5 @@ distro_download() {
 		distro_download
 	fi
 	rm -f rootfs.tar.xz
-	download_check --progress-bar "${LXC_MIRROR}${DISTROPATH}rootfs.tar.xz"
+	download_and_check --progress-bar "${LXC_MIRROR}${DISTROPATH}rootfs.tar.xz"
 }

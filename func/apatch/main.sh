@@ -28,9 +28,9 @@ apatch_feat() {
 	esac
 }
 get_tools() {
-	download_check --progress-bar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -o ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
-	download_check --progress-bar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -o ${TEMP}/ap/kpimg-android
-	download_check --progress-bar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -o ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-$OS
+	download_and_check --progress-bar "https://github.com/AtopesSayuri/APatchAutoPatchTool/raw/main/bin/magiskboot" -o ${TEMP}/ap/magiskboot && chmod u+x ${TEMP}/ap/magiskboot
+	download_and_check --progress-bar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kpimg-android" -o ${TEMP}/ap/kpimg-android
+	download_and_check --progress-bar "https://github.com/bmax121/KernelPatch/releases/download/${KPVER}/kptools-$OS" -o ${TEMP}/ap/kptools-$OS && chmod u+x ${TEMP}/ap/kptools-$OS
 }
 patch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap

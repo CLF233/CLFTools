@@ -22,7 +22,7 @@ echo_red() {
 }
 
 # useful funcs
-download_check(){
+download_and_check(){
   curl -L "$@"
   ES=$?
   if [[ "${ES}" != "0" ]];then
@@ -30,6 +30,20 @@ download_check(){
     exit $ES
   else
     echo_green "[I]: Download success."
+  fi
+}
+if_empty_red(){
+  if [[ "$1" == "" ]];then
+    echo_red "[E]: Bad empty input."
+    if [[ -n $2 ]];then
+      $2
+    fi
+  fi
+}
+if_empty_exit(){
+  if [[ "$1" == "" ]];then
+    echo_red "[E]: Bad empty input."
+    exit 1
   fi
 }
 
@@ -91,6 +105,7 @@ main() {
 	PROMPT+="1. Termux features\n"
 	PROMPT+="2. Linux features\n"
 	PROMPT+="3. APatch patch\n"
+  PROMPT+="4. Quickly config git\n"
 	PROMPT+="0. Exit\n"
 	echo_blue "${PROMPT}"
 	get_input "Input Your choice: " Input
@@ -107,6 +122,10 @@ main() {
 		source ${TEMP}/func/apatch/main.sh
 		apatch_feat
 		;;
+  4)
+    source ${TEMP}/func/ghconfig/main.sh
+    gh_config
+    ;;
 	0)
 		exit 0
 		;;
