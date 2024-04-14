@@ -21,8 +21,19 @@ echo_red() {
 	echo -e "\033[31m${1}\033[0m"
 }
 
+# useful funcs
+download_check(){
+  curl -L "$@"
+  ES=$?
+  if [[ "${ES}" != "0" ]];then
+    echo_red "[E]: Download failed."
+    exit $ES
+  else
+    echo_green "[I]: Download success."
+  fi
+}
+
 # input func
-Input=""
 get_input() {
 	read -r -p "$1" "$2"
 }

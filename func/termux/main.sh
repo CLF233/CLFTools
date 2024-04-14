@@ -30,7 +30,7 @@ termux_feat() {
 		main
 		;;
 	*)
-		echo_red "E: Bad input: $Input"
+		echo_red "[E]: Bad input: $Input"
     sleep 3
 		termux_feat
 		;;

@@ -16,7 +16,7 @@ container_menu() {
 		termux_feat
 		;;
 	*)
-		echo_red "E: Bad input: $Input"
+		echo_red "[E]: Bad input: $Input"
 		container_menu
 		;;
 	esac
@@ -33,9 +33,9 @@ distro_download() {
 	DISTROPATH=$(curl -sL "${LXC_MIRROR}/meta/1.0/index-system" | grep ${DISTRO} | grep ${CPU_ARCH} | grep -v cloud | tail -n 1 | cut -d ";" -f 6)
 	ES=$?
 	if [[ $ES != 0 ]]; then
-		echo_red "E: Get link failed. Make sure you entered true distro name."
+		echo_red "[E]: Get link failed. Make sure you entered true distro name."
 		distro_download
 	fi
 	rm -f rootfs.tar.xz
-	wget "${LXC_MIRROR}${DISTROPATH}rootfs.tar.xz"
+	download_check --progress-bar "${LXC_MIRROR}${DISTROPATH}rootfs.tar.xz"
 }
