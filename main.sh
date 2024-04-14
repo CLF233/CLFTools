@@ -3,10 +3,12 @@
 #Love and Peace
 #shellcheck disable=SC2086
 
-if [[ "$CLFDEBUG" == "true" ]];then
-  set -x
+if [[ "$CLFDEBUG" == "true" ]]; then
+	set -x
+	clear() {
+    echo_yellow "[W]: Command clear is used but it has been disabled."
+  }
 fi
-
 #Colorful echo funcs
 echo_yellow() {
 	echo -e "\033[33m${1}\033[0m"
@@ -22,44 +24,42 @@ echo_red() {
 }
 
 # useful funcs
-download_and_check(){
-  curl -L "$@"
-  ES=$?
-  if [[ "${ES}" != "0" ]];then
-    echo_red "[E]: Download failed."
-    exit $ES
-  else
-    echo_green "[I]: Download success."
-  fi
+download_and_check() { # download and check. if fail: exit $?
+	curl -L "$@"
+	ES=$?
+	if [[ "${ES}" != "0" ]]; then
+		echo_red "[E]: Download failed."
+		exit $ES
+	else
+		echo_green "[I]: Download success."
+	fi
 }
-if_empty_red(){
-  if [[ "$1" == "" ]];then
-    echo_red "[E]: Bad empty input."
-    if [[ -n $2 ]];then
-      $2
-    fi
-  fi
+if_empty_red() { # if $1 empty then echo_red
+	if [[ "${1}" == "" ]]; then
+		echo_red "[E]: Bad empty input."
+	fi
 }
-if_empty_exit(){
-  if [[ "$1" == "" ]];then
-    echo_red "[E]: Bad empty input."
-    exit 1
-  fi
+if_empty_run() { # if $1 is empty then run $2
+	if [[ "${1}" == "" ]]; then
+		echo_red "[E]: Bad empty input."
+		$2
+	fi
 }
-
 # input func
 get_input() {
 	read -r -p "$1" "$2"
 }
 
-# OS
+# vars and other preparetion
+## get OS
 if (command -v getprop >/dev/null 2>&1); then
 	OS=android
 else
 	OS=linux
 fi
-
-# TEMP folder
+## set up CODETOEXIT
+CODETOEXIT="${RANDOM}"
+## set tmp folder
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 rm -rf $PREFIX/tmp/CLF*
 mkdir -p ${TEMP}
@@ -99,13 +99,13 @@ export CPU_ARCH=${ARCH_TYPE}
 # Arg solver #TODO
 
 main() {
-  clear
+	clear
 	PROMPT="CLFTools - Ver 0.0.1\n"
 	PROMPT+="By CLF\n"
 	PROMPT+="1. Termux features\n"
 	PROMPT+="2. Linux features\n"
 	PROMPT+="3. APatch patch\n"
-  PROMPT+="4. Quickly config git\n"
+	PROMPT+="4. Quickly config git\n"
 	PROMPT+="0. Exit\n"
 	echo_blue "${PROMPT}"
 	get_input "Input Your choice: " Input
@@ -122,19 +122,22 @@ main() {
 		source ${TEMP}/func/apatch/main.sh
 		apatch_feat
 		;;
-  4)
-    source ${TEMP}/func/ghconfig/main.sh
-    gh_config
-    ;;
+	4)
+		source ${TEMP}/func/ghconfig/main.sh
+		gh_config
+		;;
 	0)
 		exit 0
 		;;
 	*)
 		echo_red "E: Bad input: $Input\n"
-    sleep 3
+		sleep 3
 		main
 		;;
 	esac
 }
 
+if [[ -n $* ]]; then
+	$CUSCMD
+fi
 main

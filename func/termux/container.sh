@@ -23,7 +23,8 @@ container_menu() {
 }
 
 distro_download() {
-	get_input "Input a distro: " DISTRO
+  echo_blue "[I]: Enter \"${CODETOEXIT}\" to stop this action."
+	get_input "Input a distro name: " DISTRO
 	LXC_MIRROR="https://mirrors.bfsu.edu.cn/lxc-images"
 	# Get rootfs download link of Specified $DISTRO and $VERSION
 	# $MIRROR, $DISTRO, $VERSION and $CPU_ARCH are defined at main()

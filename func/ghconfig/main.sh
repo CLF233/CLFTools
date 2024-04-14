@@ -3,10 +3,18 @@
 #2023.6.12,23:00.
 
 gh_config() {
+  echo_blue "[I]: Enter \"${CODETOEXIT}\" to go back to the last page."
   get_input "Input your GitHub nickname: " NAME
-  if_empty_red "$NAME" gh_config
+  if_empty_run "$NAME" gh_config
+  if [[ "${NAME}" == "${CODETOEXIT}" ]];then
+    main
+  fi
   get_input "Input a email you want to use for commit: " EMAIL
   if_empty_red "$EMAIL" gh_config
+  if [[ "${EMAIL}" == "${CODETOEXIT}" ]];then
+    main
+  fi
+
 	set -e
 	set -x
 	#配置默认初始仓库分支为main

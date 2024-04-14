@@ -34,23 +34,30 @@ get_tools() {
 }
 patch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
+  echo_blue "[I]: Enter \"${CODETOEXIT}\" to stop this action."
 	get_input "Input KP version: " KPVER
 	if [[ -z ${KPVER} ]]; then
 		echo_red "[E]: No KP version is specified."
 		patch
+	elif [[ "${KPVER}" == "${CODETOEXIT}" ]]; then
+		apatch_feat
 	fi
 	get_input "Input boot image FULL path: " BOOTPATH
 	if [[ ! -f ${BOOTPATH} ]]; then
 		echo_red "[E]: Wrong image path: No such file, or specified path is a folder."
 		patch
 	elif [[ -z ${BOOTPATH} ]]; then
-    echo_red "[E]: Empty image path is not allowed."
+		echo_red "[E]: Empty image path is not allowed."
 		patch
+	elif [[ "${BOOTPATH}" == "${CODETOEXIT}" ]]; then
+		apatch_feat
 	fi
 	get_input "Input SuperKey: " SKEY
 	if [[ -z ${SKEY} ]]; then
 		echo_red "[E]: Empty SuperKey is not allowed."
 		patch
+	elif [[ "${SKEY}" == "${CODETOEXIT}" ]]; then
+		apatch_feat
 	fi
 	get_tools
 	cp "$BOOTPATH" ${TEMP}/ap/boot.img
@@ -59,10 +66,11 @@ patch() {
 	./kptools-$OS --patch --skey ${SKEY} --kpimg kpimg-android --image kernel --out kernel || exit 1
 	./magiskboot repack boot.img new-patched.img
 	echo_green "[I]: Success. Output: ${TEMP}/ap/new-patched.img"
-  exit 0
+	exit 0
 }
 unpatch() {
 	rm -rf ${TEMP}/ap && mkdir -p ${TEMP}/ap
+  echo_blue "[I]: Enter \"${CODETOEXIT}\" to stop this action."
 	get_tools
 	cd ${TEMP}/ap || exit 1
 	get_input "Input FULL image path: " BOOTPATH
@@ -72,10 +80,12 @@ unpatch() {
 	elif [[ -z ${BOOTPATH} ]]; then
 		echo_red "[E]: Empty image path is not allowed."
 		patch
+	elif [[ "${BOOTPATH}" == "${CODETOEXIT}" ]]; then
+		apatch_feat
 	fi
 	./magiskboot unpack boot.img
 	./kptools-$OS --unpatch --image kernel
 	./magiskboot repack boot.img new-unpatched.img || exit 1
 	echo_green "[I]: Success. Output: ${TEMP}/ap/new-unpatched.img"
-  exit 0
+	exit 0
 }
