@@ -4,7 +4,7 @@
 
 apatch_feat() {
 	clear
-	PROMPT="CLFTools - apatch_feat\n"
+	PROMPT="CLFTools - /apatch_feat \n"
 	PROMPT+="1. Patch a boot image\n"
 	PROMPT+="2. Unpatch a boot image\n"
 	PROMPT+="0. Go back to the last page\n"

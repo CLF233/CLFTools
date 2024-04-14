@@ -10,7 +10,7 @@ fi
 termux_feat() {
   clear
 	echo_blue "Developing...\n"
-  PROMPT="CLFTools - termux_feat\n"
+  PROMPT="CLFTools - /termux_feat\n"
 	PROMPT+="1. Container feats\n"
   PROMPT+="2. Get some infomations of current OS\n"
 	PROMPT+="0. Go back to the last page\n"

@@ -3,7 +3,7 @@
 #Three body
 
 container_menu() {
-	PROMPT="CLFTools container_menu\n"
+	PROMPT="CLFTools /termux/container_menu\n"
 	PROMPT+="1. Download rootfs\n"
 	PROMPT+="0. Go back to the last page\n"
 	echo_blue "${PROMPT}"
