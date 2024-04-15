@@ -3,8 +3,10 @@
 #Love and Peace
 #shellcheck disable=SC2086
 
-if [[ "$CLFDEBUG" == "true" ]]; then
+if [[ "$CLFDEBUG" == "1" ]]; then
 	set -x
+elif [[ "$CLFDEBUG" == "2" ]];then
+  set -x
 	clear() {
     echo_yellow "[W]: Command clear is used but it has been disabled."
   }
