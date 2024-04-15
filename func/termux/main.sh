@@ -3,7 +3,7 @@
 #The Shawshank Redemption
 
 if [[ -z $TERMUX_VERSION ]];then
-  echo_red "E: Use these feats in Termux!"
+  echo_red "[E]: Use these feats in Termux!"
   sleep 3
   main
 fi
@@ -37,4 +37,4 @@ termux_feat() {
 	esac
 }
 
-# Eh, I have to say that this is a script with full of shit ;(
+# Eh, I have to say that this is a script with full of shitcode ;(

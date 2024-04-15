@@ -27,6 +27,7 @@ echo_red() {
 
 # useful funcs
 download_and_check() { # download and check. if fail: exit $?
+  echo_blue "[I]: Downloading..."
 	curl -L "$@"
 	ES=$?
 	if [[ "${ES}" != "0" ]]; then
