@@ -5,11 +5,15 @@
 
 if [[ "$CLFDEBUG" == "1" ]]; then
 	set -x
-elif [[ "$CLFDEBUG" == "2" ]];then
-  set -x
+elif [[ "$CLFDEBUG" == "2" ]]; then
 	clear() {
-    echo_yellow "[W]: Command clear is used but it has been disabled."
-  }
+		echo_yellow "[W]: Command clear is used but it has been disabled."
+	}
+elif [[ "$CLFDEBUG" == "3" ]]; then
+	set -x
+	clear() {
+		echo_yellow "[W]: Command clear is used but it has been disabled."
+	}
 fi
 #Colorful echo funcs
 echo_yellow() {
@@ -27,7 +31,7 @@ echo_red() {
 
 # useful funcs
 download_and_check() { # download and check. if fail: exit $?
-  echo_blue "[I]: Downloading..."
+	echo_blue "[I]: Downloading..."
 	curl -L "$@"
 	ES=$?
 	if [[ "${ES}" != "0" ]]; then
