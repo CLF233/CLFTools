@@ -66,6 +66,9 @@ else
 fi
 ## set up CODETOEXIT
 CODETOEXIT="${RANDOM}"
+while [[ $CODETOEXIT -lt 10 ]];do
+  CODETOEXIT="${RANDOM}"
+done
 ## set tmp folder
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 rm -rf $PREFIX/tmp/CLF*
