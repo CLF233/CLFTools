@@ -41,6 +41,11 @@ download_and_check() { # download and check. if fail: exit $?
 		echo_green "[I]: Download success."
 	fi
 }
+pause(){
+  echo -e "\033[34m"
+  read -p "[I]: Press ENTER to continue"
+  echo -e "\033[0m"
+}
 if_empty_red() { # if $1 empty then echo_red
 	if [[ "${1}" == "" ]]; then
 		echo_red "[E]: Bad empty input."

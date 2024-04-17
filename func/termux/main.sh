@@ -29,6 +29,8 @@ termux_feat() {
     ;;
   10)
     am start --user 0 -a android.intent.action.VIEW -d "https://github.com/CLF233/CLFTools" > /dev/null
+    pause
+    termux_feat
     ;;
 	0)
 		main
