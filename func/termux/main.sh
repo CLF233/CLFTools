@@ -13,6 +13,7 @@ termux_feat() {
   PROMPT="CLFTools - /termux_feat\n"
 	PROMPT+="1. Container feats\n"
   PROMPT+="2. Get some infomations of current OS\n"
+  PROMPT+="10. Open project main page\n"
 	PROMPT+="0. Go back to the last page\n"
 	echo_blue "$PROMPT"
 	get_input "Input Your choice: " Input
@@ -25,6 +26,9 @@ termux_feat() {
     source ${TEMP}/func/termux/getinfo.sh
     get_info
     termux_feat
+    ;;
+  10)
+    am start --user 0 -a android.intent.action.VIEW -d "https://github.com/CLF233/CLFTools" > /dev/null
     ;;
 	0)
 		main
