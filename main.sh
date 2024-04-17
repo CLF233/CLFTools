@@ -110,7 +110,7 @@ export CPU_ARCH=${ARCH_TYPE}
 
 main() {
 	clear
-	PROMPT="CLFTools - Ver 0.0.1 - / \n"
+	PROMPT="CLFTools - Ver 0.1.0 - / \n"
 	PROMPT+="By CLF\n"
 	PROMPT+="1. Termux features\n"
 	PROMPT+="2. Linux features\n"
