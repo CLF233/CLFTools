@@ -145,8 +145,8 @@ main() {
 		exit 0
 		;;
 	*)
-		echo_red "E: Bad input: $Input\n"
-		sleep 3
+		echo_red "[E]: Bad input: $Input"
+		pause
 		main
 		;;
 	esac

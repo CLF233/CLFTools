@@ -4,7 +4,7 @@
 
 if [[ -z $TERMUX_VERSION ]];then
   echo_red "[E]: Use these feats in Termux!"
-  sleep 3
+  pause
   main
 fi
 termux_feat() {
@@ -37,7 +37,7 @@ termux_feat() {
 		;;
 	*)
 		echo_red "[E]: Bad input: $Input"
-    sleep 3
+    pause
 		termux_feat
 		;;
 	esac

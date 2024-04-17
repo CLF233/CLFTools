@@ -22,7 +22,7 @@ apatch_feat() {
 		;;
 	*)
 		echo_red "[E]: Bad input: ${input}"
-		sleep 3
+		pause
 		apatch_feat
 		;;
 	esac

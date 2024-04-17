@@ -27,7 +27,7 @@ gh_config() {
 	git config --global http.postBuffer 10737418240
 	git config --global https.postBuffer 10737418240
   echo_green "[I]: Success."
-  sleep 3
+  pause
   main
 }
 ##########
