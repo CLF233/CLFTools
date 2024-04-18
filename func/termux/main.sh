@@ -3,19 +3,19 @@
 #The Shawshank Redemption
 
 if [[ -z $TERMUX_VERSION ]];then
-  echo_red "[E]: Use these feats in Termux!"
+  red "[E]: Use these feats in Termux!"
   pause
   main
 fi
 termux_feat() {
   clear
-	echo_blue "Developing...\n"
+	blue "Developing...\n"
   PROMPT="CLFTools - /termux_feat\n"
 	PROMPT+="1. Container feats\n"
   PROMPT+="2. Get some infomations of current OS\n"
   PROMPT+="10. Open project main page\n"
 	PROMPT+="0. Go back to the last page\n"
-	echo_blue "$PROMPT"
+	blue "$PROMPT"
 	get_input "Input Your choice: " Input
 	case $Input in
 	1)
@@ -36,7 +36,7 @@ termux_feat() {
 		main
 		;;
 	*)
-		echo_red "[E]: Bad input: $Input"
+		red "[E]: Bad input: $Input"
     pause
 		termux_feat
 		;;

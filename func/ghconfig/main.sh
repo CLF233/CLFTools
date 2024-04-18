@@ -3,7 +3,7 @@
 #2023.6.12,23:00.
 
 gh_config() {
-  echo_blue "[I]: Enter \"${CODETOEXIT}\" to go back to the last page."
+  blue "[I]: Enter \"${CODETOEXIT}\" to go back to the last page."
   get_input "Input your GitHub nickname: " NAME
   if_empty_run "$NAME" gh_config
   if [[ "${NAME}" == "${CODETOEXIT}" ]];then
@@ -26,7 +26,7 @@ gh_config() {
 	#配置最大缓冲区大小为10G(防止推送/拉取失败)
 	git config --global http.postBuffer 10737418240
 	git config --global https.postBuffer 10737418240
-  echo_green "[I]: Success."
+  green "[I]: Success."
   pause
   main
 }

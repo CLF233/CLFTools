@@ -3,10 +3,11 @@
 #The Godfather
 
 linux_feat() {
+  clear
 	PROMPT="CLFTools - /linux_feat\n"
 	PROMPT+="1. Get info of current OS\n"
 	PROMPT+="0. Go back to the last page\n"
-	echo_blue "$PROMPT"
+	blue "$PROMPT"
 	get_input "Input your choice: " Input
 	case $Input in
 	0)

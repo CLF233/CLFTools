@@ -7,38 +7,38 @@ if [[ "$CLFDEBUG" == "1" ]]; then
 	set -x
 elif [[ "$CLFDEBUG" == "2" ]]; then
 	clear() {
-		echo_yellow "[W]: Command clear is used but it has been disabled."
+		yellow "[W]: Command clear is used but it has been disabled."
 	}
 elif [[ "$CLFDEBUG" == "3" ]]; then
 	set -x
 	clear() {
-		echo_yellow "[W]: Command clear is used but it has been disabled."
+		yellow "[W]: Command clear is used but it has been disabled."
 	}
 fi
 #Colorful echo funcs
-echo_yellow() {
+yellow() {
 	echo -e "\033[33m${1}\033[0m"
 }
-echo_blue() {
+blue() {
 	echo -e "\033[34m${1}\033[0m"
 }
-echo_green() {
+green() {
 	echo -e "\033[32m${1}\033[0m"
 }
-echo_red() {
+red() {
 	echo -e "\033[31m${1}\033[0m"
 }
 
 # useful funcs
 download_and_check() { # download and check. if fail: exit $?
-	echo_blue "[I]: Downloading..."
+	red "[I]: Downloading..."
 	curl -L "$@"
 	ES=$?
 	if [[ "${ES}" != "0" ]]; then
-		echo_red "[E]: Download failed."
+		red "[E]: Download failed."
 		exit $ES
 	else
-		echo_green "[I]: Download success."
+		red "[I]: Download success."
 	fi
 }
 pause(){
@@ -46,14 +46,14 @@ pause(){
   read -p "[I]: Press ENTER to continue"
   echo -e "\033[0m"
 }
-if_empty_red() { # if $1 empty then echo_red
+if_empty_red() { # if $1 empty then red
 	if [[ "${1}" == "" ]]; then
-		echo_red "[E]: Bad empty input."
+		red "[E]: Bad empty input."
 	fi
 }
 if_empty_run() { # if $1 is empty then run $2
 	if [[ "${1}" == "" ]]; then
-		echo_red "[E]: Bad empty input."
+		red "[E]: Bad empty input."
 		$2
 	fi
 }
@@ -115,14 +115,14 @@ export CPU_ARCH=${ARCH_TYPE}
 
 main() {
 	clear
-	PROMPT="CLFTools - Ver 0.1.0 - / \n"
+	PROMPT="CLFTools - Ver 0.1.1 - / \n"
 	PROMPT+="By CLF\n"
 	PROMPT+="1. Termux features\n"
 	PROMPT+="2. Linux features\n"
 	PROMPT+="3. APatch patch\n"
 	PROMPT+="4. Quickly config git\n"
 	PROMPT+="0. Exit\n"
-	echo_blue "${PROMPT}"
+	blue "${PROMPT}"
 	get_input "Input Your choice: " Input
 	case $Input in
 	1)
@@ -145,7 +145,7 @@ main() {
 		exit 0
 		;;
 	*)
-		echo_red "[E]: Bad input: $Input"
+		red "[E]: Bad input: $Input"
 		pause
 		main
 		;;
