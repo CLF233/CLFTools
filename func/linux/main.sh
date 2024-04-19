@@ -16,6 +16,8 @@ linux_feat() {
 	1)
 		source ${TEMP}/func/linux/getinfo.sh
 		get_info
+    pause
+    linux_feat
 		;;
 	esac
 }

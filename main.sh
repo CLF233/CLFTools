@@ -3,18 +3,33 @@
 #Love and Peace
 #shellcheck disable=SC2086
 
-if [[ "$CLFDEBUG" == "1" ]]; then
-	set -x
-elif [[ "$CLFDEBUG" == "2" ]]; then
-	clear() {
-		yellow "[W]: Command clear is used but it has been disabled."
-	}
-elif [[ "$CLFDEBUG" == "3" ]]; then
-	set -x
-	clear() {
-		yellow "[W]: Command clear is used but it has been disabled."
-	}
-fi
+check_dbg() {
+	if [[ "$CLFDEBUG" == "1" ]]; then
+		set -x
+	elif [[ "$CLFDEBUG" == "2" ]]; then
+		clear() {
+			yellow "[W]: Command clear is used but it has been disabled."
+		}
+	elif [[ "$CLFDEBUG" == "3" ]]; then
+		set -x
+		clear() {
+			yellow "[W]: Command clear is used but it has been disabled."
+		}
+	else
+		red "[E]: Missing environment var."
+		exit 1
+	fi
+}
+print_help() {
+	echo -e "\033[34m"
+	cat <<EOF
+  CLFTools - created by CLF
+  Args: 
+  -h,       print this help
+  -v,       enable verbose mode
+EOF
+	echo -e "\033[0m"
+}
 #Colorful echo funcs
 yellow() {
 	echo -e "\033[33m${1}\033[0m"
@@ -41,10 +56,10 @@ download_and_check() { # download and check. if fail: exit $?
 		red "[I]: Download success."
 	fi
 }
-pause(){
-  echo -e "\033[34m"
-  read -p "[I]: Press ENTER to continue"
-  echo -e "\033[0m"
+pause() {
+	echo -e "\033[34m"
+	read -p "[I]: Press ENTER to continue"
+	echo -e "\033[0m"
 }
 if_empty_red() { # if $1 empty then red
 	if [[ "${1}" == "" ]]; then
@@ -71,8 +86,8 @@ else
 fi
 ## set up CODETOEXIT
 CODETOEXIT="${RANDOM}"
-while [[ $CODETOEXIT -lt 10 ]];do
-  CODETOEXIT="${RANDOM}"
+while [[ $CODETOEXIT -lt 10 ]]; do
+	CODETOEXIT="${RANDOM}"
 done
 ## set tmp folder
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
@@ -112,6 +127,25 @@ fi
 export CPU_ARCH=${ARCH_TYPE}
 
 # Arg solver #TODO
+while getopts ":vVh" OPT; do
+	case $OPT in
+	h)
+		print_help
+		exit 0
+		;;
+	v | V)
+		check_dbg
+		pause
+		;;
+	\?)
+		echo "Invalid option: -$OPTARG" >&2
+		;;
+	:)
+		echo "Option -$OPTARG requires an argument." >&2
+		exit 1
+		;;
+	esac
+done
 
 main() {
 	clear
