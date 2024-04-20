@@ -3,30 +3,12 @@
 #Love and Peace
 #shellcheck disable=SC2086
 
-check_dbg() {
-	if [[ "$CLFDEBUG" == "1" ]]; then
-		set -x
-	elif [[ "$CLFDEBUG" == "2" ]]; then
-		clear() {
-			yellow "[W]: Command clear is used but it has been disabled."
-		}
-	elif [[ "$CLFDEBUG" == "3" ]]; then
-		set -x
-		clear() {
-			yellow "[W]: Command clear is used but it has been disabled."
-		}
-	else
-		red "[E]: Missing environment var."
-		exit 1
-	fi
-}
 print_help() {
 	echo -e "\033[34m"
 	cat <<EOF
   CLFTools - created by CLF
   Args: 
   -h,       print this help
-  -v,       enable verbose mode
 EOF
 	echo -e "\033[0m"
 }
@@ -43,6 +25,22 @@ green() {
 red() {
 	echo -e "\033[31m${1}\033[0m"
 }
+# DEBUG env check
+if [[ $CLFDEBUG -eq 1 ]]; then
+	set -x
+elif [[ $CLFDEBUG -eq 2 ]]; then
+	yellow "[W]: Command clear will be disabled."
+	clear() {
+		yellow "[W]: Command clear is used but it has been disabled."
+	}
+elif [[ $CLFDEBUG -eq 3 ]]; then
+	yellow "[W]: Command clear will be disabled."
+	set -x
+	clear() {
+		yellow "[W]: Command clear is used but it has been disabled."
+	}
+fi
+
 
 # useful funcs
 download_and_check() { # download and check. if fail: exit $?
@@ -53,7 +51,7 @@ download_and_check() { # download and check. if fail: exit $?
 		red "[E]: Download failed."
 		exit $ES
 	else
-		red "[I]: Download success."
+		blue "[I]: Download success."
 	fi
 }
 pause() {
@@ -93,7 +91,7 @@ done
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 rm -rf $PREFIX/tmp/CLF*
 mkdir -p ${TEMP}
-cp -rf $(realpath $0 | sed 's/\/main.sh//g')/* ${TEMP}
+cp -rf "$(realpath $0 | sed 's/\/main.sh//g')/*" ${TEMP}
 
 # Arch getter
 # It will create a global variable CPU_ARCH
@@ -127,21 +125,20 @@ fi
 export CPU_ARCH=${ARCH_TYPE}
 
 # Arg solver #TODO
-while getopts ":vVh" OPT; do
+while getopts ":h" OPT; do
 	case $OPT in
 	h)
 		print_help
 		exit 0
 		;;
-	v | V)
-		check_dbg
-		pause
-		;;
 	\?)
-		echo "Invalid option: -$OPTARG" >&2
+		red "[E]: Invalid option: -$OPTARG" >&2
+    pause
+    exit 1
 		;;
 	:)
-		echo "Option -$OPTARG requires an argument." >&2
+		red "[E]: Option -$OPTARG requires an argument." >&2
+    pause
 		exit 1
 		;;
 	esac
@@ -186,7 +183,4 @@ main() {
 	esac
 }
 
-if [[ -n $* ]]; then
-	$CUSCMD
-fi
 main
