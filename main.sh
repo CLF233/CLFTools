@@ -72,7 +72,7 @@ if_empty_run() { # if $1 is empty then run $2
 }
 # input func
 get_input() {
-	read -r -p "$1" "$2"
+	read -r -p "$1" $2
 }
 
 # vars and other preparetion
@@ -91,7 +91,7 @@ done
 TEMP="${PREFIX}/tmp/CLF${RANDOM}"
 rm -rf $PREFIX/tmp/CLF*
 mkdir -p ${TEMP}
-cp -rf "$(realpath $0 | sed 's/\/main.sh//g')/*" ${TEMP}
+cp -rf $(realpath $0 | sed 's/\/main.sh//g')/* ${TEMP}
 
 # Arch getter
 # It will create a global variable CPU_ARCH
@@ -125,12 +125,15 @@ fi
 export CPU_ARCH=${ARCH_TYPE}
 
 # Arg solver #TODO
-while getopts ":h" OPT; do
+while getopts ":hE:" OPT; do
 	case $OPT in
 	h)
 		print_help
 		exit 0
 		;;
+  E)
+    $OPTARG
+    ;;
 	\?)
 		red "[E]: Invalid option: -$OPTARG" >&2
     pause
