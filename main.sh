@@ -8,7 +8,9 @@ print_help() {
 	cat <<EOF
   CLFTools - created by CLF
   Args: 
-  -h,       print this help
+  -h,             print this help
+  -V,             debug mode
+  -E "COMMAND",   Execute additional commands(DEV ONLY)
 EOF
 	echo -e "\033[0m"
 }
@@ -26,21 +28,24 @@ red() {
 	echo -e "\033[31m${1}\033[0m"
 }
 # DEBUG env check
-if [[ $CLFDEBUG -eq 1 ]]; then
-	set -x
-elif [[ $CLFDEBUG -eq 2 ]]; then
-	yellow "[W]: Command clear will be disabled."
-	clear() {
-		yellow "[W]: Command clear is used but it has been disabled."
-	}
-elif [[ $CLFDEBUG -eq 3 ]]; then
-	yellow "[W]: Command clear will be disabled."
-	set -x
-	clear() {
-		yellow "[W]: Command clear is used but it has been disabled."
-	}
-fi
-
+checkdbg() {
+	if [[ $CLFDEBUG -eq 1 ]]; then
+		set -x
+	elif [[ $CLFDEBUG -eq 2 ]]; then
+		yellow "[W]: Command clear will be disabled."
+		clear() {
+			yellow "[W]: Command clear is used but it has been disabled."
+		}
+	elif [[ $CLFDEBUG -eq 3 ]]; then
+		yellow "[W]: Command clear will be disabled."
+		set -x
+		clear() {
+			yellow "[W]: Command clear is used but it has been disabled."
+		}
+  else
+    DBGENABLE=false
+	fi
+}
 
 # useful funcs
 download_and_check() { # download and check. if fail: exit $?
@@ -125,23 +130,32 @@ fi
 export CPU_ARCH=${ARCH_TYPE}
 
 # Arg solver #TODO
-while getopts ":hE:" OPT; do
+while getopts ":hVE:" OPT; do
 	case $OPT in
 	h)
 		print_help
 		exit 0
 		;;
-  E)
-    $OPTARG
+	E)
+		$OPTARG
+		;;
+	V)
+    checkdbg
+    if [ $DBGENABLE ];then
+      red "[E]: No env var found. Unable to enter debug mode."
+      exit 1
+    else
+      yellow "[W]: Debug mode is ON."
+    fi
     ;;
 	\?)
 		red "[E]: Invalid option: -$OPTARG" >&2
-    pause
-    exit 1
+		pause
+		exit 1
 		;;
 	:)
 		red "[E]: Option -$OPTARG requires an argument." >&2
-    pause
+		pause
 		exit 1
 		;;
 	esac

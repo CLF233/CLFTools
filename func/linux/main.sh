@@ -19,5 +19,10 @@ linux_feat() {
     pause
     linux_feat
 		;;
+  *)
+    red "[E]: Bad input: $Input"
+    pause
+    linux_feat
+    ;;
 	esac
 }
