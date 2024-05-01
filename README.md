@@ -1,6 +1,6 @@
 # CLFTools
 
-A tool written by shell
+A tool written in shell
 
 > [!WARNING]
 > Note that this project isnt very stable
